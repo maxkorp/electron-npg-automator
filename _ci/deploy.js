@@ -5,12 +5,10 @@ const getTagInfo = require('../util/get-tag-info');
 
 getTagInfo()
   .then(({electronVersion}) => {
-    var folder = fs.readdirSync(modulePath)[0];
-
     var cmd = 'node-pre-gyp';
     var args = ['publish', '--runtime=electron', `--target=${electronVersion}`];
 
-    var proc = cp.spawn(cmd, args, {cwd: folder});
+    var proc = cp.spawn(cmd, args, {cwd: modulePath()});
     proc.on('close', (code) => {
       process.exit(code);
     });

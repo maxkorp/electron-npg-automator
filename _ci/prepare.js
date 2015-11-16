@@ -3,15 +3,15 @@ const modulePath = require('../util/module-path');
 
 let do_prepare;
 try {
-  do_prepare = require('./custom_prepare');
+  do_prepare = require('./custom-prepare');
 }
 catch(e) {
   console.log('using default install script');
-  do_prepare = function() {
+  do_prepare = function(_modulePath) {
     return new Promise((resolve, reject) => {
       cp.exec(
         'npm install',
-        {cwd: modulePath},
+        {cwd: _modulePath},
         (err, stdout, stderr) => {
           let out = err || {};
           out.stdout = stdout;
@@ -25,8 +25,8 @@ catch(e) {
         }
       );
     });
-  }
+  };
 }
 
 downloadModule()
-  .then(() => do_prepare());
+  .then(() => do_prepare(modulePath()));

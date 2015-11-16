@@ -1,13 +1,15 @@
 const cp = require('child_process');
-const modulePath = require('../util/module-path');
 const getTagInfo = require('../util/get-tag-info');
+const moduleParentPath = require('../util/module-parent-path');
+const path = require('path');
 
 getTagInfo()
   .then(({electronVersion}) => {
-    var cmd = path.resolve('node_modules', '.bin', 'electron-rebuild') + (process.platform == 'win32' ? '.cmd' : '');
+    var cmd = 'node';
     var args = [
-      '-n', electronVersion,
-      '-m', modulePath
+      path.resolve('node_modules', '.bin', 'electron-rebuild'),
+      '-v', electronVersion.replace('v', ''),
+      '-m', moduleParentPath()
     ];
 
     var proc = cp.spawn(cmd, args);

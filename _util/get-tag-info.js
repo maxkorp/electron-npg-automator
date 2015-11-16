@@ -1,12 +1,12 @@
 module.exports = function getTagInfo() {
   return new Promise((resolve, reject) => {
-    var tag = getTag();
+    const tag = getTag();
     if (!tag) {
       return reject('no tag');
     }
 
     const [moduleVersion, electronVersion] = tag.split('-');
-    resolve([moduleVersion, electronVersion]);
+    resolve({moduleVersion, electronVersion});
   });
 }
 
