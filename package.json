@@ -1,0 +1,21 @@
+{
+  "name": "electron-npg-automator",
+  "version": "1.0.0",
+  "description": "Automate node-pre-gyp deployment of native modules for electron",
+  "main": "index.js",
+  "scripts": {
+    "compile": "babel --presets es2015 -d ./ci ./_ci && babel --presets es2015 -d ./server ./_server && babel --presets es2015 -d ./util ./_util",
+    "install": "npm run compile",
+    "start": "node server/main.js"
+  },
+  "author": "Max Korp <maxkorp@8bytealchemy.com>",
+  "license": "ISC",
+  "dependencies": {
+    "babel-cli": "^6.1.18",
+    "babel-preset-es2015": "^6.1.18",
+    "electron-rebuild": "^1.0.2",
+    "fstream": "^1.0.8",
+    "request": "^2.65.0",
+    "tar": "^2.2.1"
+  }
+}
