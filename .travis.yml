@@ -24,11 +24,11 @@ before_install:
 - npm run compile
 
 install:
-- node server/prepare.js
-- node server/build.js
+- node ci/prepare.js
+- node ci/build.js
 
 after_success:
-- node server/deploy.js
+- node ci/deploy.js
 
 os:
 - linux
