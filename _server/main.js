@@ -1,21 +1,22 @@
 const checkVersions = require('./check-versions');
 const getConfig = require('../util/get-config');
-const makeTags = require('./make-tags');
+const makeTag = require('./make-tag');
 const pushTags = require('./push-tags');
 
 const pollInterval = getConfig('poll_interval');
 function runTagger() {
-  checkVersions()
-    .then(makeTags)
-    .then((tags) => {
-      if (!tags.length) {
-        return;
-      }
-
-      return pushTags()
-        .then(() => {
-          console.log(`${new Date().toString()}: pushed ${tags.length} new tag(s)`);
-        })
+  return pushTags()
+    .then(checkVersions)
+    .then(({moduleReleases, electronReleases}) => {
+      var prom = Promise.resolve();
+      moduleReleases.forEach((moduleRelease) => {
+        electronReleases.forEach((electronRelease) => {
+          prom = prom.then(() => {
+            return makeTag(moduleRelease, electronRelease);
+          });
+        });
+      });
+      return prom;
     })
     .catch((reason) => {
       console.error(`${new Date().toString()}: ${reason}`);
