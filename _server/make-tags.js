@@ -6,7 +6,7 @@ module.exports = function makeTags(versions) {
     var output = [];
     versions.electron.forEach((electronVersion) => {
       versions.module.forEach((moduleVersion) => {
-        var tagName = `${moduleVersion.tag_name}-${electronVersion.tag_name}`;
+        var tagName = `ena-${moduleVersion.tag_name}-${electronVersion.tag_name}`;
         if (!~tags.indexOf(tagName)) {
           cp.execSync(`git tag ${tagName}`);
 

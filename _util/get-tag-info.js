@@ -5,7 +5,7 @@ module.exports = function getTagInfo() {
       return reject('no tag');
     }
 
-    const [moduleVersion, electronVersion] = tag.split('-');
+    const [ena, moduleVersion, electronVersion] = tag.split('-');
     resolve({moduleVersion, electronVersion});
   });
 }
