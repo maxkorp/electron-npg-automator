@@ -13,6 +13,7 @@ addons:
 
 branches:
   only:
+    - master
     - /^ena-.*$/
 
 before_install:
