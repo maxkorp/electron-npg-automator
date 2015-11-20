@@ -37,3 +37,5 @@ ci
 server
 util
 module_to_build
+config.js
+config.json
