@@ -9,8 +9,6 @@ module.exports = function getUrl() {
     .then(() => queryGithub('module', 'releases'))
     .then((response) => {
       response.body.some((release) => {
-        console.log('moduleVersion: '+ moduleVersion);
-        console.log('tag_name: ' + release.tag_name);
         if (release.tag_name == moduleVersion) {
           url = release.tarball_url;
           return true;
