@@ -2,7 +2,7 @@ const queryGithub = require('../util/query-github');
 
 module.exports = function checkVersions() {
   console.log(`${new Date().toString()}: Checking for new versions`);
-  return Promise.all([get('electron'), get('module')])
+  return Promise.all([get('module'), get('electron')])
     .then(([moduleReleases, electronReleases]) => {
       return {
         moduleReleases,
