@@ -13,6 +13,8 @@ getTagInfo()
     ];
 
     var proc = cp.spawn(cmd, args);
+    proc.stdout.pipe(process.stdout);
+    proc.stderr.pipe(process.stderr);
     proc.on('close', (code) => {
       process.exit(code);
     });

@@ -12,6 +12,7 @@ module.exports = function downloadModule() {
 };
 
 function download(url) {
+  console.log(`${new Date().toString()} downloading module from ${url}`)
   const opts = {
     headers: {
       'Authorization': `token ${getConfig('gh_token')}`,

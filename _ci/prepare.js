@@ -29,4 +29,7 @@ catch(e) {
 }
 
 downloadModule()
-  .then(() => do_prepare(modulePath()));
+  .then(() => {
+    console.log(`${new Date().toString()} preparing module`);
+    return do_prepare(modulePath());
+  });
