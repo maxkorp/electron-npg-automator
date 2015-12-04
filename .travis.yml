@@ -1,9 +1,10 @@
+language: node_js
+node_js: 0.12
 sudo: false
 compiler: clang
 env:
   - CC=clang CXX=clang++ npm_config_clang=1
 addons:
-  addons:
   apt:
     packages:
     - build-essential
@@ -17,9 +18,6 @@ branches:
     - /^ena-.*$/
 
 before_install:
-- curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash
-- source $HOME/.bashrc
-- nvm install 0.12
 - npm install
 - npm run compile
 
