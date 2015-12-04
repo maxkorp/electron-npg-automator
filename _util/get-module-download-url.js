@@ -10,7 +10,7 @@ module.exports = function getUrl() {
     .then((response) => {
       response.body.some((release) => {
         if (release.tag_name == moduleVersion) {
-          url = 'https://github.com/nodegit/nodegit/archive/v0.0.10000002.tar.gz';//release.tarball_url;
+          url = release.tarball_url;
           return true;
         }
       });
