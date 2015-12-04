@@ -8,7 +8,8 @@ getTagInfo()
   .then(({electronVersion}) => {
     var modulePath_ = modulePath();
     var cmd = path.join(modulePath_, 'node_modules', '.bin', 'node-pre-gyp');
-    var args = ['package', 'publish', '--runtime=electron', `--target=${electronVersion}`];
+    var target = electronVersion.replace('v', '');
+    var args = ['package', 'publish', '--runtime=electron', `--target=${target}`];
     var proc = cp.spawn(cmd, args, {cwd: modulePath_});
     proc.stdout.pipe(process.stdout);
     proc.stderr.pipe(process.stderr);
