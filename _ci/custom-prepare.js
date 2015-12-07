@@ -1,5 +1,5 @@
 var cp = require('child_process');
-​
+
 module.exports = function(cwd) {
   return new Promise(function(resolve, reject) {
     cp.spawn('npm', ['install', '--ignore-scripts'], {cwd: cwd})
