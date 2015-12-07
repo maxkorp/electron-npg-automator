@@ -1,3 +1,4 @@
+const cp = require('child_process');
 const downloadModule = require('../util/download-module');
 const modulePath = require('../util/module-path');
 

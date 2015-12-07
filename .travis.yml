@@ -3,7 +3,6 @@ compiler: clang
 env:
   - CC=clang CXX=clang++ npm_config_clang=1
 addons:
-  addons:
   apt:
     packages:
     - build-essential
@@ -25,6 +24,8 @@ before_install:
 
 install:
 - node ci/prepare.js
+
+script:
 - node ci/build.js
 
 after_success:
