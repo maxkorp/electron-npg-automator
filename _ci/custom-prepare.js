@@ -2,20 +2,21 @@ var cp = require('child_process');
 
 module.exports = function(cwd) {
   return new Promise(function(resolve, reject) {
-    cp.spawn('npm', ['install', '--ignore-scripts'], {cwd: cwd})
-      .on('close', function(code) {
-        if (code != 0) {
-          return reject(code);
+    cp.exec('npm install --ignore-scripts', { cwd: cwd }, function(err, stdout, stderr) {
+      console.log(stdout);
+      console.error(stderr);
+      if (err) {
+        return reject(err);
+      }
+
+      cp.exec('node lifecycleScripts/prepareForBuild.js', { cwd: cwd }, function(err2, stdout2, stderr2) {
+        console.log(stdout2);
+        console.error(stderr2);
+        if (err2) {
+          return reject(err2);
         }
-        cp.spawn('node', ['lifecycleScripts/prepareForBuild.js'], {cwd: cwd})
-          .on('close', function(code) {
-            console.log('woah!');
-            console.log(code);
-            if (code != 0) {
-              return reject(code);
-            }
-            resolve();
-          });
+        resolve();
       });
+    });
   });
 }
