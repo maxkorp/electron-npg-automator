@@ -7,13 +7,15 @@ const getTagInfo = require('../util/get-tag-info');
 getTagInfo()
   .then(({electronVersion}) => {
     var modulePath_ = modulePath();
-    var cmd = path.join(modulePath_, 'node_modules', '.bin', 'node-pre-gyp');
     var target = electronVersion.replace('v', '');
-    var args = ['package', 'publish', '--runtime=electron', `--target=${target}`];
-    var proc = cp.spawn(cmd, args, {cwd: modulePath_});
-    proc.stdout.pipe(process.stdout);
-    proc.stderr.pipe(process.stderr);
-    proc.on('close', (code) => {
-      process.exit(code);
+    var cmd = path.join(modulePath_, 'node_modules', '.bin', 'node-pre-gyp');
+    cmd = [cmd, 'package', 'publish', '--runtime=electron', `--target=${target}`].join(' ');
+    var proc = cp.exec(cmd, {cwd: modulePath_}, function (err, stdout, stderr) {
+      console.log(stdout);
+      console.error(stderr);
+      if (err) {
+        process.exit(err);
+      }
+      process.exit(0);
     });
   });
